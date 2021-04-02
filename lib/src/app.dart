@@ -10,22 +10,35 @@ class AppState extends State<App> {
   int counter = 0;
   build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Welcome',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Hello there!'),
+          backgroundColor: Colors.black,
         ),
-        backgroundColor: Colors.black,
-      ),
-      body: Text('$counter'),
-      floatingActionButton: FloatingActionButton(
+        body: Center(
+          child: Text(
+            'Welcome to my first flutter app. You clicked the button $counter times',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Colors.white,
           onPressed: () {
             setState(() {
               counter += 1;
             });
           },
-          backgroundColor: Colors.black,
-          child: Icon(Icons.add)),
-    ));
+          icon: Icon(
+            Icons.add,
+            color: Colors.black,
+          ),
+          label: Text(
+            "Click me",
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
+        backgroundColor: Colors.black,
+      ),
+    );
   }
 }
