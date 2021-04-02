@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' show get;
+import './models/image_model.dart';
 
 class App extends StatefulWidget {
   AppState createState() {
@@ -8,6 +10,15 @@ class App extends StatefulWidget {
 
 class AppState extends State<App> {
   int counter = 0;
+
+  void fetchImage() async {
+    counter += 1;
+    var jsonResponse =
+        await get(Uri.https('jsonplaceholder.typicode.com', 'photos/$counter'));
+    ImageModel newImage = ImageModel.fromRawJson(jsonResponse.body);
+    print(newImage);
+  }
+
   build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
@@ -23,11 +34,7 @@ class AppState extends State<App> {
         ),
         floatingActionButton: FloatingActionButton.extended(
           backgroundColor: Colors.white,
-          onPressed: () {
-            setState(() {
-              counter += 1;
-            });
-          },
+          onPressed: fetchImage,
           icon: Icon(
             Icons.add,
             color: Colors.black,

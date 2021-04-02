@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class Image {
+class ImageModel {
   int id;
   int albumId;
   String title;
@@ -8,20 +8,29 @@ class Image {
   String thumbnailUrl;
 
   // Default constructor
-  Image({String title, String url, String thumbnailUrl, int id, int albumId});
+  ImageModel(
+      {String title, String url, String thumbnailUrl, int id, int albumId});
 
   // Parsing from parsed json
-  Image.fromParsedJson({Map<String, dynamic> parsedJson}) {
-    id = parsedJson['id'];
-    albumId = parsedJson['albumId'];
-    title = parsedJson['title'];
-    url = parsedJson['url'];
-    thumbnailUrl = parsedJson['thumbnailUrl'];
+  ImageModel.fromParsedJson({Map<String, dynamic> parsedJson}) {
+    assignData(parsedJson: parsedJson);
   }
 
   // Parsing from unparsed json
-  Image.fromRawJson(dynamic rawJson) {
+  ImageModel.fromRawJson(dynamic rawJson) {
     Map<String, dynamic> parsedJson = jsonDecode(rawJson);
-    Image.fromParsedJson(parsedJson: parsedJson);
+    assignData(parsedJson: parsedJson);
+  }
+
+  void assignData({Map<String, dynamic> parsedJson}) {
+    this.id = parsedJson['id'];
+    this.albumId = parsedJson['albumId'];
+    this.title = parsedJson['title'];
+    this.url = parsedJson['url'];
+    this.thumbnailUrl = parsedJson['thumbnailUrl'];
+  }
+
+  toString() {
+    return "id: $id, albumId: $albumId, title: $title, url: $url, thumbnailUrl: $thumbnailUrl";
   }
 }
