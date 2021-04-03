@@ -2,11 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart' show get;
 
 class ImageModel {
-  int id;
-  int albumId;
+  String id;
   String title;
   String url;
-  String thumbnailUrl;
 
   // Default constructor
   ImageModel(
@@ -25,13 +23,11 @@ class ImageModel {
 
   void assignData({Map<String, dynamic> parsedJson}) {
     this.id = parsedJson['id'];
-    this.albumId = parsedJson['albumId'];
-    this.title = parsedJson['title'];
-    this.url = parsedJson['url'];
-    this.thumbnailUrl = parsedJson['thumbnailUrl'];
+    this.title = parsedJson['alt_description'];
+    this.url = parsedJson['urls']['small'];
   }
 
   toString() {
-    return "id: $id, albumId: $albumId, title: $title, url: $url, thumbnailUrl: $thumbnailUrl";
+    return "id: $id, title: $title, url: $url";
   }
 }
